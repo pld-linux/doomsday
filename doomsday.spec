@@ -4,7 +4,7 @@ Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	1.8.5
-Release:	0.4
+Release:	0.5
 License:	GPL v2
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/deng/deng-%{version}.tar.gz
@@ -62,7 +62,7 @@ Exec=doomsday -game jdoom
 #Icon=hexen.png
 Terminal=false
 Type=Application
-Category=Game;FPP;
+Categories=Game;FirstPersonGame;
 Encoding=UTF-8
 # vi: encoding=utf-8
 EOF
@@ -75,7 +75,7 @@ Exec=doomsday -game jhexen
 #Icon=heretic.png
 Terminal=false
 Type=Application
-Category=Game;FPP;
+Categories=Game;FirstPersonGame;
 Encoding=UTF-8
 # vi: encoding=utf-8
 EOF
@@ -88,10 +88,12 @@ Exec=doomsday -game jheretic
 #Icon=heretic.png
 Terminal=false
 Type=Application
-Category=Game;FPP;
+Categories=Game;FirstPersonGame;
 Encoding=UTF-8
 # vi: encoding=utf-8
 EOF
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
