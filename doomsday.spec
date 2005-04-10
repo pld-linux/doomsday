@@ -1,13 +1,16 @@
+# TODO
+# - icons for desktop files
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	1.8.5
-Release:	0.1
+Release:	0.4
 License:	GPL v2
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/deng/deng-%{version}.tar.gz
 # Source0-md5:	0e1f34ebddae77315765ce089e88a9f3
 Patch0:		%{name}-ncurses.patch
+Patch1:		%{name}-runtimedir.patch
 URL:		http://www.doomsdayhq.com/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -16,7 +19,9 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	rpmbuild(macros) >= 1.194
 Requires(post):	/sbin/ldconfig
+Requires:		TiMidity++
 # it's FUBAR by storing pointers in int struct fields
 ExcludeArch:	alpha amd64 ia64 ppc64 s390x sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,6 +37,7 @@ jDoom, jHeretic i jHexen dla Linuksa.
 %prep
 %setup -q -n deng-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__aclocal}
@@ -43,9 +49,49 @@ jDoom, jHeretic i jHexen dla Linuksa.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-doom.desktop
+[Desktop Entry]
+Name=Doom
+Comment=Doom for linux
+Exec=doomsday -game jdoom
+#Icon=hexen.png
+Terminal=false
+Type=Application
+Category=Game;FPP;
+Encoding=UTF-8
+# vi: encoding=utf-8
+EOF
+
+cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-hexen.desktop
+[Desktop Entry]
+Name=Hexen
+Comment=Hexen for linux
+Exec=doomsday -game jhexen
+#Icon=heretic.png
+Terminal=false
+Type=Application
+Category=Game;FPP;
+Encoding=UTF-8
+# vi: encoding=utf-8
+EOF
+
+cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-heretic.desktop
+[Desktop Entry]
+Name=Heretic
+Comment=Heretic for linux
+Exec=doomsday -game jheretic
+#Icon=heretic.png
+Terminal=false
+Type=Application
+Category=Game;FPP;
+Encoding=UTF-8
+# vi: encoding=utf-8
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,12 +99,14 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/ldconfig
 if [ "$1" = "1" ]; then
-	echo "To run doomsday you need some WAD file: either freedoom package"
-	echo "or some shareware or commercial WAD from Doom or Heretic:"
-	echo "Doom.wad, Doom1.wad, Doom2.wad, Tnt.wad, Plutonia.wad,"
-	echo "Heretic.wad or Heretic1.wad."
-	echo "When you have them, run doomsday with:"
-	echo "doomsday -game [ jdoom | jheretic | jhexen ]"
+	%banner -e %{name} <<-EOF
+	To run doomsday you need some WAD file: either freedoom package
+	or some shareware or commercial WAD from Doom or Heretic:
+	Doom.wad, Doom1.wad, Doom2.wad, Tnt.wad, Plutonia.wad,
+	Heretic.wad or Heretic1.wad.
+	When you have them, run doomsday with:
+	doomsday -game [ jdoom | jheretic | jhexen ]
+EOF
 fi
 
 %postun -p /sbin/ldconfig
@@ -70,3 +118,4 @@ fi
 %attr(755,root,root) %{_libdir}/*.so.*.*.*
 %{_libdir}/*.la
 %{_datadir}/deng
+%{_desktopdir}/*.desktop
