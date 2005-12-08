@@ -3,11 +3,11 @@
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
-Version:	1.8.6
-Release:	0.1
+Version:	1.9.0
+Release:	0.beta3.1
 License:	GPL v2
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/deng/deng-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/deng/deng-%{version}-beta3.tar.gz
 # Source0-md5:	1717d0de5bc8efba9076d6b8e2055d08
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-runtimedir.patch
@@ -35,7 +35,7 @@ jDoom, jHeretic and jHexen for Linux.
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
-%setup -q -n deng-%{version}
+%setup -q -n deng-%{version}-beta3
 %patch0 -p1
 %patch1 -p1
 
