@@ -8,7 +8,7 @@ Release:	0.beta3.1
 License:	GPL v2
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/deng/deng-%{version}-beta3.tar.gz
-# Source0-md5:	1717d0de5bc8efba9076d6b8e2055d08
+# Source0-md5:	581fefd6165dd4104b25656a6b9f31b4
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-runtimedir.patch
 URL:		http://www.doomsdayhq.com/
