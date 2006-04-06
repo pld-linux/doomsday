@@ -1,5 +1,6 @@
 # TODO
 # - icons for desktop files
+# - (CVE-2006-1618) http://security.gentoo.org/glsa/glsa-200604-05.xml
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
