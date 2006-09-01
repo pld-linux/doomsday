@@ -1,17 +1,21 @@
 # TODO
 # - icons for desktop files
 # - (CVE-2006-1618) http://security.gentoo.org/glsa/glsa-200604-05.xml
+#
+%define		_beta beta4
+#
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	1.9.0
-Release:	0.beta3.1
+Release:	0.%{_beta}.1
 License:	GPL v2
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/deng/deng-%{version}-beta3.tar.gz
-# Source0-md5:	581fefd6165dd4104b25656a6b9f31b4
+Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{_beta}.tar.gz
+# Source0-md5:	b2bec9a475eee1438f55ebde00b3d13f
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-runtimedir.patch
+Patch2:		%{name}-ac.patch
 URL:		http://www.doomsdayhq.com/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -36,9 +40,10 @@ jDoom, jHeretic and jHexen for Linux.
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
-%setup -q -n deng-%{version}-beta3
+%setup -q -n deng-%{version}-%{_beta}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__aclocal}
