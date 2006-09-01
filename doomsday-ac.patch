@@ -1,0 +1,13 @@
+--- deng-1.9.0-beta4/configure.ac.orig	2006-09-01 17:30:14.000000000 +0200
++++ deng-1.9.0-beta4/configure.ac	2006-09-01 17:33:59.216224250 +0200
+@@ -124,10 +124,8 @@
+ 	Src/dpDehRead/Makefile Src/dpMapLoad/Makefile
+ 	Src/dsSDLMixer/Makefile	Src/dsOpenAL/Makefile ])
+ 
+-cd ..
+ rm -f ./Data/Doomsday.pk3
+ zip -v -0  ./Data/Doomsday.pk3  ./Data/Graphics/* ./Data/Fonts/* ./Data/KeyMaps/*
+-cd Build
+ 
+ #cd ..
+ #python ./Scripts/makedmt.py < ./Include/mapdata.hs
