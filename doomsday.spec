@@ -5,7 +5,7 @@
 %define		_beta beta4
 #
 Summary:	jDoom, jHeretic and jHexen for Linux
-Summary(pl):	jDoom, jHeretic i jHexen dla Linuksa
+Summary(pl.UTF-8):   jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	1.9.0
 Release:	0.%{_beta}.1
@@ -36,7 +36,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 jDoom, jHeretic and jHexen for Linux.
 
-%description -l pl
+%description -l pl.UTF-8
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
