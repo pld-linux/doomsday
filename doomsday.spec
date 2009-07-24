@@ -15,6 +15,7 @@ Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
 # Source0-md5:	63fdbc11f0473535f7206f62952a1e2e
 URL:		http://www.doomsdayhq.com/
 BuildRequires:	OpenAL-devel
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	SDL_mixer-devel
@@ -22,6 +23,7 @@ BuildRequires:	SDL_net-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	cmake >= 2.4
+BuildRequires:	curl-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	zip
 Requires:	TiMidity++
@@ -42,6 +44,7 @@ cd build
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DCURSES_INCLUDE_PATH=/usr/include/ncurses \
+	-Dlibdir=%{_libdir} \
 	../doomsday
 %{__make}
 
