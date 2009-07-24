@@ -1,21 +1,18 @@
 # TODO
 # - icons for desktop files
 # - (CVE-2006-1618) http://security.gentoo.org/glsa/glsa-200604-05.xml
-#
-%define		_beta beta4
-#
+
+%define		subver	beta6.4
+%define		rel		0.1
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	1.9.0
-Release:	0.%{_beta}.1
+Release:	0.%{subver}.%{rel}
 License:	GPL v2
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{_beta}.tar.gz
-# Source0-md5:	b2bec9a475eee1438f55ebde00b3d13f
-Patch0:		%{name}-ncurses.patch
-Patch1:		%{name}-runtimedir.patch
-Patch2:		%{name}-ac.patch
+Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
+# Source0-md5:	63fdbc11f0473535f7206f62952a1e2e
 URL:		http://www.doomsdayhq.com/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -24,14 +21,11 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	cmake >= 2.4
 BuildRequires:	rpmbuild(macros) >= 1.213
-Requires(post):	/sbin/ldconfig
-Requires:		TiMidity++
-# it's FUBAR by storing pointers in int struct fields
-ExcludeArch:	%{x8664} alpha ia64 ppc64 s390x sparc64
+BuildRequires:	zip
+Requires:	TiMidity++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 jDoom, jHeretic and jHexen for Linux.
@@ -40,24 +34,22 @@ jDoom, jHeretic and jHexen for Linux.
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
-%setup -q -n deng-%{version}-%{_beta}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%setup -q -n deng-%{version}-%{subver}
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-
-%configure
+install -d build
+cd build
+%cmake \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DCURSES_INCLUDE_PATH=/usr/include/ncurses \
+	../doomsday
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-doom.desktop
@@ -99,13 +91,10 @@ Encoding=UTF-8
 # vi: encoding=utf-8
 EOF
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.a
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 if [ "$1" = "1" ]; then
 	%banner -e %{name} <<-EOF
 	To run doomsday you need some WAD file: either freedoom package
@@ -117,13 +106,13 @@ if [ "$1" = "1" ]; then
 EOF
 fi
 
-%postun -p /sbin/ldconfig
-
 %files
 %defattr(644,root,root,755)
-%doc Doc/*
 %attr(755,root,root) %{_bindir}/doomsday
-%attr(755,root,root) %{_libdir}/*.so.*.*.*
-%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/libdpdehread.so
+%attr(755,root,root) %{_libdir}/libdpwadmapconverter.so
+%attr(755,root,root) %{_libdir}/libjdoom.so
+%attr(755,root,root) %{_libdir}/libjheretic.so
+%attr(755,root,root) %{_libdir}/libjhexen.so
 %{_datadir}/deng
 %{_desktopdir}/*.desktop
