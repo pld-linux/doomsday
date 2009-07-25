@@ -111,6 +111,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
+%doc doomsday/build/README
 %attr(755,root,root) %{_bindir}/doomsday
 %attr(755,root,root) %{_libdir}/libdpdehread.so
 %attr(755,root,root) %{_libdir}/libdpwadmapconverter.so
