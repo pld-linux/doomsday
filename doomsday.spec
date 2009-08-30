@@ -1,7 +1,7 @@
 # TODO
 # - icons for desktop files
 
-%define		subver	beta6.4
+%define		subver	beta6.5
 %define		rel		1
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
@@ -11,7 +11,7 @@ Release:	0.%{subver}.%{rel}
 License:	GPL v2
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
-# Source0-md5:	63fdbc11f0473535f7206f62952a1e2e
+# Source0-md5:	08ecaec83c088dc0ce08a08c3a58374a
 URL:		http://www.doomsdayhq.com/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
@@ -19,8 +19,6 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	cmake >= 2.4
 BuildRequires:	curl-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
