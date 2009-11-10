@@ -1,7 +1,7 @@
 # TODO
 # - icons for desktop files
 
-%define		subver	beta6.5
+%define		subver	beta6.7
 %define		rel		1
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
@@ -10,8 +10,8 @@ Version:	1.9.0
 Release:	0.%{subver}.%{rel}
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
-# Source0-md5:	08ecaec83c088dc0ce08a08c3a58374a
+Source0:	http://dl.sourceforge.net/project/deng/Doomsday%20Engine/%{version}-%{subver}/deng-%{version}-%{subver}.tar.gz
+# Source0-md5:	9c706df9a3f078b9b62af842e09b088e
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
 # Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
