@@ -27,6 +27,10 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	cmake >= 2.4
 BuildRequires:	curl-devel
+BuildRequires:	libpng-devel
+BuildRequires:	ncurses-devel
+BuildRequires:	python
+BuildRequires:	python-modules
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	zip
 Requires:	TiMidity++
