@@ -32,7 +32,6 @@ BuildRequires:	ncurses-devel
 BuildRequires:	python
 BuildRequires:	python-modules
 BuildRequires:	rpmbuild(macros) >= 1.213
-BuildRequires:	zip
 Requires:	TiMidity++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,6 +48,7 @@ jDoom, jHeretic i jHexen dla Linuksa.
 install -d build
 cd build
 %cmake \
+	-DBUILDOPENAL=1 \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DCURSES_INCLUDE_PATH=/usr/include/ncurses \
 	-Dlibdir=%{_libdir} \
