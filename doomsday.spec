@@ -2,7 +2,7 @@
 # - icons for desktop files
 
 %define		subver	beta6.7
-%define		rel		1
+%define		rel		2
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
