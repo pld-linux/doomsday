@@ -1,7 +1,7 @@
 # TODO
 # - sync pl
 %define		subver	beta6.9
-%define		rel		1
+%define		rel		2
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
@@ -12,11 +12,11 @@ Group:		Applications/Games
 Source0:	http://downloads.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
 # Source0-md5:	907ef41b70e2dbf148ef7e4a0350c6bd
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
-# Source1-md5:	24783c4c52c9fdf762a73f70b6406e63
+# Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
-# Source2-md5:	24783c4c52c9fdf762a73f70b6406e63
+# Source2-md5:	573845e6e747f68617ac67f3a87dc78e
 Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1-48x48.png
-# Source3-md5:	24783c4c52c9fdf762a73f70b6406e63
+# Source3-md5:	c89e36c49eabe2846137f313a5250308
 URL:		http://www.dengine.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
