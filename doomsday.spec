@@ -1,7 +1,7 @@
 # TODO
 # - sync pl
 %define		subver	beta6.9
-%define		rel		6
+%define		rel		7
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
@@ -17,6 +17,7 @@ Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x
 # Source2-md5:	573845e6e747f68617ac67f3a87dc78e
 Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1-48x48.png
 # Source3-md5:	c89e36c49eabe2846137f313a5250308
+Patch0:		%{name}-libpng15.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
@@ -44,6 +45,7 @@ jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
 %setup -q -n deng-%{version}-%{subver}
+%patch0 -p1
 
 %build
 install -d build
