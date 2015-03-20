@@ -1,7 +1,7 @@
 # TODO
 # - sync pl
 %define		subver	beta6.9
-%define		rel		9
+%define		rel		10
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
