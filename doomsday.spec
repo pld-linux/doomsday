@@ -33,6 +33,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	python
 BuildRequires:	python-modules
 BuildRequires:	rpmbuild(macros) >= 1.595
+Requires(post):	/sbin/ldconfig
 Requires:	TiMidity++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -107,7 +108,8 @@ EOF
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
 %banner -o -e %{name} <<-EOF
 To run doomsday you need some WAD file: either freedoom package
 or some shareware or commercial WAD from Doom or Heretic:
