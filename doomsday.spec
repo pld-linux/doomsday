@@ -1,16 +1,16 @@
 # TODO
 # - sync pl
-%define		subver	beta6.9
-%define		rel		10
+# - cleen up spec
+%define		subver	stable
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
-Version:	1.9.0
-Release:	0.%{subver}.%{rel}
+Version:	1.15.4
+Release:	0.1
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
-Source0:	http://downloads.sourceforge.net/deng/deng-%{version}-%{subver}.tar.gz
-# Source0-md5:	907ef41b70e2dbf148ef7e4a0350c6bd
+Source0:	http://downloads.sourceforge.net/deng/%{name}-%{subver}-%{version}.tar.gz
+# Source0-md5:	8329eacdea73edca7aea4034ca8d78aa
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
 # Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
@@ -23,10 +23,10 @@ URL:		http://www.dengine.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
-BuildRequires:	SDL-devel >= 1.2.0
-BuildRequires:	SDL_mixer-devel
-BuildRequires:	SDL_net-devel
-BuildRequires:	cmake >= 2.4
+BuildRequires:	SDL2-devel
+BuildRequires:	SDL2_mixer-devel
+BuildRequires:	qt4-qmake
+BuildRequires:	assimp-devel
 BuildRequires:	curl-devel
 BuildRequires:	libpng-devel
 BuildRequires:	ncurses-devel
@@ -45,27 +45,22 @@ hardware accelerated 3D graphics, surround sound and much more.
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
-%setup -q -n deng-%{version}-%{subver}
-%patch0 -p1
-%patch1 -p1
+%setup -q -n doomsday-%{subver}-%{version}
+#%patch0 -p1
+#%patch1 -p1
 
 %build
 install -d build
 cd build
 LDFLAGS="-lm"
-%cmake \
-	-DBUILDOPENAL=1 \
-	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-	-DCURSES_INCLUDE_PATH=/usr/include/ncurses \
-	-Dlibdir=%{_libdir} \
-	../doomsday
+qmake-qt4 CONFIG+=deng_notools \
+	-r ../doomsday/doomsday.pro
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-%{__make} -C build install \
-	DESTDIR=$RPM_BUILD_ROOT
+%{__make} -C build install INSTALL_ROOT=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/doom.png
@@ -111,7 +106,7 @@ EOF
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+%post -p /sbin/ldconfig
 %banner -o -e %{name} <<-EOF
 To run doomsday you need some WAD file: either freedoom package
 or some shareware or commercial WAD from Doom or Heretic:
@@ -121,16 +116,31 @@ When you have them, run doomsday with:
 doomsday -game [ jdoom | jheretic | jhexen ]
 EOF
 
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc doomsday/build/README
+#%doc doomsday/build/README
 %attr(755,root,root) %{_bindir}/doomsday
-%attr(755,root,root) %{_libdir}/libdpdehread.so
-%attr(755,root,root) %{_libdir}/libdpwadmapconverter.so
-%attr(755,root,root) %{_libdir}/libjdoom.so
-%attr(755,root,root) %{_libdir}/libjheretic.so
-%attr(755,root,root) %{_libdir}/libjhexen.so
-%attr(755,root,root) %{_libdir}/libdsopenal.so
-%{_datadir}/deng
+%attr(755,root,root) %{_bindir}/doomsday-server
+%attr(755,root,root) %{_bindir}/launch-doomsday
+
+%attr(755,root,root) %{_libdir}/libdeng_core.so.2.0.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2
+%attr(755,root,root) %{_libdir}/libdeng_appfw.so.1.15.4
+%attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.1
+%attr(755,root,root) %{_libdir}/libdeng_doomsday.so.1.15.4
+%attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.1
+%attr(755,root,root) %{_libdir}/libdeng_gui.so.1.15.4
+%attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.1
+%attr(755,root,root) %{_libdir}/libdeng_legacy.so.1.15.4
+%attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.1
+%attr(755,root,root) %{_libdir}/libdeng_shell.so.1.15.4
+%attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.1
+
+%{_libdir}/doomsday
+%{_datadir}/doomsday
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+%{_mandir}/man6/*
+
