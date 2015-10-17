@@ -1,6 +1,6 @@
 # TODO
 # - sync pl
-# - cleen up spec
+# - clean up spec. cleanup what?
 %define		subver	stable
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
@@ -17,7 +17,7 @@ Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x
 # Source2-md5:	573845e6e747f68617ac67f3a87dc78e
 Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1-48x48.png
 # Source3-md5:	c89e36c49eabe2846137f313a5250308
-Patch0:		%{name}-libpng15.patch
+#Patch0:		%{name}-libpng15.patch
 Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenAL-devel
@@ -60,12 +60,13 @@ qmake-qt4 CONFIG+=deng_notools \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-%{__make} -C build install INSTALL_ROOT=$RPM_BUILD_ROOT
+%{__make} -C build install \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/doom.png
-cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/hexen.png
-cp -a %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}/heretic.png
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/doom.png
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/hexen.png
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}/heretic.png
 
 cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-doom.desktop
 [Desktop Entry]
