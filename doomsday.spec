@@ -18,7 +18,7 @@ Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x
 Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1-48x48.png
 # Source3-md5:	c89e36c49eabe2846137f313a5250308
 #Patch0:		%{name}-libpng15.patch
-Patch1:		%{name}-format.patch
+#Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
