@@ -128,17 +128,17 @@ EOF
 %attr(755,root,root) %{_bindir}/doomsday-server
 %attr(755,root,root) %{_bindir}/launch-doomsday
 
-%attr(755,root,root) %{_libdir}/libdeng_core.so.2.0.0
+%attr(755,root,root) %{_libdir}/libdeng_core.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2
-%attr(755,root,root) %{_libdir}/libdeng_appfw.so.1.15.4
+%attr(755,root,root) %{_libdir}/libdeng_appfw.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.1
-%attr(755,root,root) %{_libdir}/libdeng_doomsday.so.1.15.4
+%attr(755,root,root) %{_libdir}/libdeng_doomsday.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.1
-%attr(755,root,root) %{_libdir}/libdeng_gui.so.1.15.4
+%attr(755,root,root) %{_libdir}/libdeng_gui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.1
-%attr(755,root,root) %{_libdir}/libdeng_legacy.so.1.15.4
+%attr(755,root,root) %{_libdir}/libdeng_legacy.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.1
-%attr(755,root,root) %{_libdir}/libdeng_shell.so.1.15.4
+%attr(755,root,root) %{_libdir}/libdeng_shell.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.1
 
 %{_libdir}/doomsday
@@ -146,4 +146,3 @@ EOF
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_mandir}/man6/*
-
