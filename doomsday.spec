@@ -23,8 +23,6 @@ Source6:	%{name}-hexen.desktop
 #Patch0:		%{name}-libpng15.patch
 #Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
-#BuildRequires:	OpenAL-devel
-#BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	QtCore-devel
 BuildRequires:	QtNetwork-devel
@@ -32,7 +30,6 @@ BuildRequires:	QtOpenGL-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
 BuildRequires:	assimp-devel
-#BuildRequires:	curl-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
