@@ -17,6 +17,9 @@ Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x
 # Source2-md5:	573845e6e747f68617ac67f3a87dc78e
 Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1-48x48.png
 # Source3-md5:	c89e36c49eabe2846137f313a5250308
+Source4:	%{name}-doom.desktop
+Source5:	%{name}-heretic.desktop
+Source6:	%{name}-hexen.desktop
 #Patch0:		%{name}-libpng15.patch
 #Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
@@ -75,41 +78,9 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/doom.png
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/hexen.png
 cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}/heretic.png
 
-cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-doom.desktop
-[Desktop Entry]
-Name=Doom
-Comment=Doom for linux
-Exec=doomsday -game jdoom
-Icon=doom.png
-Terminal=false
-Type=Application
-Categories=Game;FirstPersonGame;
-Encoding=UTF-8
-EOF
-
-cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-hexen.desktop
-[Desktop Entry]
-Name=Hexen
-Comment=Hexen for linux
-Exec=doomsday -game jhexen
-Icon=hexen.png
-Terminal=false
-Type=Application
-Categories=Game;FirstPersonGame;
-Encoding=UTF-8
-EOF
-
-cat <<EOF > $RPM_BUILD_ROOT%{_desktopdir}/%{name}-heretic.desktop
-[Desktop Entry]
-Name=Heretic
-Comment=Heretic for linux
-Exec=doomsday -game jheretic
-Icon=heretic.png
-Terminal=false
-Type=Application
-Categories=Game;FirstPersonGame;
-Encoding=UTF-8
-EOF
+cp -p %{_sourcedir}/%{name}-doom.desktop $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{_sourcedir}/%{name}-hexen.desktop $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{_sourcedir}/%{name}-heretic.desktop $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT

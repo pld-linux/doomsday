@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Doom
+Comment=Doom for linux
+Exec=doomsday -game jdoom
+Icon=doom.png
+Terminal=false
+Type=Application
+Categories=Game;FirstPersonGame;
+Encoding=UTF-8

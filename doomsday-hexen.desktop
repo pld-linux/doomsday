@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Hexen
+Comment=Hexen for linux
+Exec=doomsday -game jhexen
+Icon=hexen.png
+Terminal=false
+Type=Application
+Categories=Game;FirstPersonGame;
+Encoding=UTF-8

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Heretic
+Comment=Heretic for linux
+Exec=doomsday -game jheretic
+Icon=heretic.png
+Terminal=false
+Type=Application
+Categories=Game;FirstPersonGame;
+Encoding=UTF-8
