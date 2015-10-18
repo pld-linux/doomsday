@@ -23,19 +23,27 @@ Source6:	%{name}-hexen.desktop
 #Patch0:		%{name}-libpng15.patch
 #Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
-BuildRequires:	OpenAL-devel
-BuildRequires:	OpenGL-GLU-devel
+#BuildRequires:	OpenAL-devel
+#BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	QtCore-devel
+BuildRequires:	QtNetwork-devel
+BuildRequires:	QtOpenGL-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
 BuildRequires:	assimp-devel
-BuildRequires:	curl-devel
+#BuildRequires:	curl-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
+BuildRequires:	pkgconfig
 BuildRequires:	python
 BuildRequires:	python-modules
+BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.595
+BuildRequires:	xorg-lib-libXrandr-devel
 Requires(post):	/sbin/ldconfig
 Requires:	TiMidity++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
