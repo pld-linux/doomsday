@@ -25,13 +25,13 @@ BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
-BuildRequires:	qt4-qmake
 BuildRequires:	assimp-devel
 BuildRequires:	curl-devel
 BuildRequires:	libpng-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	python
 BuildRequires:	python-modules
+BuildRequires:	qt4-qmake
 BuildRequires:	rpmbuild(macros) >= 1.595
 Requires(post):	/sbin/ldconfig
 Requires:	TiMidity++
@@ -46,7 +46,7 @@ hardware accelerated 3D graphics, surround sound and much more.
 jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
-%setup -q -n doomsday-%{subver}-%{version}
+%setup -q -n %{name}-%{subver}-%{version}
 #%patch0 -p1
 #%patch1 -p1
 
@@ -63,6 +63,12 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 %{__make} -C build install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT
+
+# no -devel package. cleanup
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libdeng_*.so
+# junk links
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libdeng_*.so.1.15
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libdeng_core.so.2.0
 
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/doom.png
@@ -140,6 +146,7 @@ EOF
 %attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.1
 %attr(755,root,root) %{_libdir}/libdeng_shell.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.1
+
 
 %{_libdir}/doomsday
 %{_datadir}/doomsday
