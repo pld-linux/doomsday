@@ -1,6 +1,8 @@
 # TODO
 # - sync pl
-# - clean up spec. cleanup what?
+# Conditional build:
+%bcond_with	qt4	# use Qt4 instead of Qt5
+
 %define		subver	stable
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
@@ -20,13 +22,12 @@ Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1
 Source4:	%{name}-doom.desktop
 Source5:	%{name}-heretic.desktop
 Source6:	%{name}-hexen.desktop
-#Patch0:		%{name}-libpng15.patch
-#Patch1:		%{name}-format.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenGL-devel
-BuildRequires:	QtCore-devel
-BuildRequires:	QtNetwork-devel
-BuildRequires:	QtOpenGL-devel
+BuildRequires:	Qt%{!?with_qt4:5}Core-devel
+BuildRequires:	Qt%{!?with_qt4:5}Network-devel
+BuildRequires:	Qt%{!?with_qt4:5}OpenGL-devel
+BuildRequires:	Qt%{!?with_qt4:5}X11Extras-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
 BuildRequires:	assimp-devel
@@ -36,8 +37,8 @@ BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python
 BuildRequires:	python-modules
-BuildRequires:	qt4-build
-BuildRequires:	qt4-qmake
+BuildRequires:	qt%{?with_qt4:4}%{!?with_qt4:5}-build
+BuildRequires:	qt%{?with_qt4:4}%{!?with_qt4:5}-qmake
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.595
 BuildRequires:	xorg-lib-libXrandr-devel
@@ -55,14 +56,12 @@ jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
 %setup -q -n %{name}-%{subver}-%{version}
-#%patch0 -p1
-#%patch1 -p1
 
 %build
 install -d build
 cd build
 LDFLAGS="-lm"
-qmake-qt4 CONFIG+=deng_notools \
+qmake-qt%{?with_qt4:4}%{!?with_qt4:5} CONFIG+=deng_notools \
 	-r ../doomsday/doomsday.pro
 %{__make}
 
