@@ -7,12 +7,12 @@
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
-Version:	1.15.4
+Version:	1.15.8
 Release:	0.1
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
 Source0:	http://downloads.sourceforge.net/deng/%{name}-%{subver}-%{version}.tar.gz
-# Source0-md5:	8329eacdea73edca7aea4034ca8d78aa
+# Source0-md5:	14487b988bd3b46580164cdcfa5989d5
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
 # Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
