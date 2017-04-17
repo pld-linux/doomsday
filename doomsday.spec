@@ -16,6 +16,7 @@ Source3:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-28/Heretic-I-1
 Source4:	%{name}-doom.desktop
 Source5:	%{name}-heretic.desktop
 Source6:	%{name}-hexen.desktop
+Patch0:		link.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	Qt5Core-devel
@@ -51,6 +52,7 @@ jDoom, jHeretic i jHexen dla Linuksa.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d doomsday/_build
