@@ -20,6 +20,7 @@ Source5:	%{name}-heretic.desktop
 Source6:	%{name}-hexen.desktop
 Patch0:		link.patch
 URL:		http://www.dengine.net/
+BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	Qt5Core-devel >= 5.5
 BuildRequires:	Qt5Network-devel
