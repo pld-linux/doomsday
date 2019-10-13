@@ -62,6 +62,8 @@ jDoom, jHeretic i jHexen dla Linuksa.
 install -d build
 cd build
 %cmake ../doomsday
+# idk why this happens
+grep -r %{_libdir}/qt5/lib . -l | xargs -r sed -i -e 's,%{_libdir}/qt5/lib/,%{_libdir}/,g'
 %{__make}
 
 %install
