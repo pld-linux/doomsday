@@ -72,6 +72,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_mandir}/man6}
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/texc
 # no -devel package. cleanup
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libdeng_*.so
 %{__rm} -r $RPM_BUILD_ROOT%{_includedir}
@@ -86,7 +87,7 @@ cp -p %{_sourcedir}/%{name}-doom.desktop $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{_sourcedir}/%{name}-hexen.desktop $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{_sourcedir}/%{name}-heretic.desktop $RPM_BUILD_ROOT%{_desktopdir}
 
-cp -p doomsday/doc/output/*.6 $RPM_BUILD_ROOT%{_mandir}/man6
+cp -p doomsday/doc/*.6 $RPM_BUILD_ROOT%{_mandir}/man6
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -107,35 +108,35 @@ EOF
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/doomsday
-%attr(755,root,root) %{_bindir}/doomsday-2.0.0
+%attr(755,root,root) %{_bindir}/doomsday-%{version}
 %attr(755,root,root) %{_bindir}/doomsdayscript
-%attr(755,root,root) %{_bindir}/doomsdayscript-2.0.0
+%attr(755,root,root) %{_bindir}/doomsdayscript-%{version}
 %attr(755,root,root) %{_bindir}/doomsday-server
-%attr(755,root,root) %{_bindir}/doomsday-server-2.0.0
+%attr(755,root,root) %{_bindir}/doomsday-server-%{version}
 %attr(755,root,root) %{_bindir}/doomsday-shell
-%attr(755,root,root) %{_bindir}/doomsday-shell-2.0.0
+%attr(755,root,root) %{_bindir}/doomsday-shell-%{version}
 %attr(755,root,root) %{_bindir}/doomsday-shell-text
-%attr(755,root,root) %{_bindir}/doomsday-shell-text-2.0.0
+%attr(755,root,root) %{_bindir}/doomsday-shell-text-%{version}
 %attr(755,root,root) %{_bindir}/md2tool
 %attr(755,root,root) %{_bindir}/savegametool
-%attr(755,root,root) %{_bindir}/savegametool-2.0.0
+%attr(755,root,root) %{_bindir}/savegametool-%{version}
 %attr(755,root,root) %{_bindir}/texc
 %attr(755,root,root) %{_bindir}/wadtool
 
 %attr(755,root,root) %{_libdir}/libdeng_core.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_appfw.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_doomsday.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_gamefw.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_gamefw.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_gamefw.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_gui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_legacy.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.2.1
 %attr(755,root,root) %{_libdir}/libdeng_shell.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.2.0
+%attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.2.1
 
 %{_libdir}/doomsday
 %{_datadir}/doomsday
