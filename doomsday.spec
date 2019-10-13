@@ -1,12 +1,14 @@
+# TODO
+# - port to use system assimp (doomsday/external/assimp)?
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
-Version:	2.0.0
+Version:	2.1.1
 Release:	1
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
 Source0:	http://downloads.sourceforge.net/deng/%{name}-%{version}.tar.gz
-# Source0-md5:	add8b4b70878aa9d98b8bb9a6502882b
+# Source0-md5:	f8478e928621c7d708d54ea88a62e9b3
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
 # Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
@@ -19,7 +21,7 @@ Source6:	%{name}-hexen.desktop
 Patch0:		link.patch
 URL:		http://www.dengine.net/
 BuildRequires:	OpenGL-devel
-BuildRequires:	Qt5Core-devel
+BuildRequires:	Qt5Core-devel >= 5.5
 BuildRequires:	Qt5Network-devel
 BuildRequires:	Qt5OpenGL-devel
 BuildRequires:	Qt5OpenGLExtensions-devel
@@ -27,6 +29,7 @@ BuildRequires:	Qt5X11Extras-devel
 BuildRequires:	SDL2-devel
 BuildRequires:	SDL2_mixer-devel
 BuildRequires:	assimp-devel
+BuildRequires:	cmake >= 3.1
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
@@ -55,16 +58,15 @@ jDoom, jHeretic i jHexen dla Linuksa.
 %patch0 -p1
 
 %build
-install -d doomsday/_build
-cd doomsday/_build
-%{cmake} ..
+install -d build
+cd build
+%cmake ../doomsday
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_mandir}/man6}
-
-%{__make} -C doomsday/_build install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # no -devel package. cleanup
@@ -101,7 +103,6 @@ EOF
 
 %files
 %defattr(644,root,root,755)
-#%doc doomsday/build/README
 %attr(755,root,root) %{_bindir}/doomsday
 %attr(755,root,root) %{_bindir}/doomsday-2.0.0
 %attr(755,root,root) %{_bindir}/doomsdayscript
