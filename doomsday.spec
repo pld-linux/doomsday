@@ -1,14 +1,12 @@
-# TODO
-# - port to use system assimp (doomsday/external/assimp)?
 Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
-Version:	2.1.1
+Version:	2.3.1
 Release:	1
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
 Source0:	http://downloads.sourceforge.net/deng/%{name}-%{version}.tar.gz
-# Source0-md5:	f8478e928621c7d708d54ea88a62e9b3
+# Source0-md5:	9ae2a3e053a6f11f37dfb450bb5e53cb
 Source1:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-26/Doom-1-48x48.png
 # Source1-md5:	b7b7a9389eba56679e5db65d95c06803
 Source2:	http://www.iconarchive.com/icons/3xhumed/mega-games-pack-23/Hexen-1-48x48.png
@@ -20,28 +18,37 @@ Source5:	%{name}-heretic.desktop
 Source6:	%{name}-hexen.desktop
 Patch0:		link.patch
 URL:		http://www.dengine.net/
-BuildRequires:	Mesa-libEGL-devel
-BuildRequires:	OpenGL-devel
+BuildRequires:	OpenAL-devel
+BuildRequires:	OpenGL-devel >= 3.3
 BuildRequires:	Qt5Core-devel >= 5.5
-BuildRequires:	Qt5Network-devel
-BuildRequires:	Qt5OpenGL-devel
-BuildRequires:	Qt5OpenGLExtensions-devel
-BuildRequires:	Qt5X11Extras-devel
-BuildRequires:	SDL2-devel
-BuildRequires:	SDL2_mixer-devel
+BuildRequires:	Qt5Gui-devel >= 5.5
+BuildRequires:	Qt5Network-devel >= 5.5
+BuildRequires:	Qt5OpenGL-devel >= 5.5
+BuildRequires:	Qt5OpenGLExtensions-devel >= 5.5
+BuildRequires:	Qt5Widgets-devel >= 5.5
+BuildRequires:	Qt5X11Extras-devel >= 5.5
+BuildRequires:	SDL2-devel >= 2.0
+BuildRequires:	SDL2_mixer-devel >= 2.0
 BuildRequires:	assimp-devel
 BuildRequires:	cmake >= 3.1
-BuildRequires:	libpng-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	fluidsynth-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	minizip-devel >= 1.2.11
 BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python
-BuildRequires:	python-modules
-BuildRequires:	qt5-build
-BuildRequires:	qt5-qmake
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	qt5-build >= 5.5
+BuildRequires:	qt5-qmake >= 5.5
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.595
+BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	xorg-lib-libICE-devel
+BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXrandr-devel
+BuildRequires:	xorg-lib-libXxf86vm-devel
+BuildRequires:	zlib-devel
 Requires(post):	/sbin/ldconfig
 Requires:	TiMidity++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,7 +59,9 @@ shooters DOOM, Heretic, and Hexen using modern technology, with
 hardware accelerated 3D graphics, surround sound and much more.
 
 %description -l pl.UTF-8
-jDoom, jHeretic i jHexen dla Linuksa.
+Silnik Doomsday pozwala grać w klasyczne strzelaniny FPP, takie
+jak DOOM, Heretic i Hexen przy użyciu współczesnej technologii,
+ze sprzętowo akcelerowaną grafiką 3D, dźwiękiem surround itp.
 
 %prep
 %setup -q
@@ -61,14 +70,15 @@ jDoom, jHeretic i jHexen dla Linuksa.
 %build
 install -d build
 cd build
-%cmake ../doomsday
-# idk why this happens
-grep -r %{_libdir}/qt5/lib . -l | xargs -r sed -i -e 's,%{_libdir}/qt5/lib/,%{_libdir}/,g'
+%cmake ../doomsday \
+	-DDENG_ASSIMP_EMBEDDED=OFF
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_mandir}/man6}
+
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -124,22 +134,32 @@ EOF
 %attr(755,root,root) %{_bindir}/wadtool
 
 %attr(755,root,root) %{_libdir}/libdeng_core.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_core.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_appfw.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_appfw.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_doomsday.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_doomsday.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_gamefw.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_gamefw.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_gamefw.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_gui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_gui.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_legacy.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_legacy.so.2.3
 %attr(755,root,root) %{_libdir}/libdeng_shell.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.2.1
+%attr(755,root,root) %ghost %{_libdir}/libdeng_shell.so.2.3
 
 %{_libdir}/doomsday
 %{_datadir}/doomsday
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
-%{_mandir}/man6/*
+%{_datadir}/metainfo/net.dengine.Doomsday.appdata.xml
+%{_desktopdir}/doomsday-doom.desktop
+%{_desktopdir}/doomsday-heretic.desktop
+%{_desktopdir}/doomsday-hexen.desktop
+%{_desktopdir}/net.dengine.Doomsday.desktop
+%{_desktopdir}/net.dengine.Shell.desktop
+%{_iconsdir}/hicolor/256x256/apps/net.dengine.Doomsday.png
+%{_pixmapsdir}/doom.png
+%{_pixmapsdir}/heretic.png
+%{_pixmapsdir}/hexen.png
+%{_mandir}/man6/doomsday.6*
+%{_mandir}/man6/doomsday-server.6*
+%{_mandir}/man6/doomsday-shell-text.6*
