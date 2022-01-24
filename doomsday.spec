@@ -2,7 +2,7 @@ Summary:	jDoom, jHeretic and jHexen for Linux
 Summary(pl.UTF-8):	jDoom, jHeretic i jHexen dla Linuksa
 Name:		doomsday
 Version:	2.3.1
-Release:	1
+Release:	2
 License:	GPL v2 / CC 3.0 (icons)
 Group:		Applications/Games
 Source0:	http://downloads.sourceforge.net/deng/%{name}-%{version}.tar.gz
