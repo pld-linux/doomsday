@@ -65,7 +65,7 @@ ze sprzętowo akcelerowaną grafiką 3D, dźwiękiem surround itp.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
